@@ -1,5 +1,3 @@
--- CONSOLIDATE ALL PROJECT TABS INTO MASTER PROJECT
-
 local r = reaper
 
 function Msg(param) -- print string to console
@@ -35,24 +33,4 @@ function Len_TS()
     local TS_Start, TS_End = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
     --Msg(TS_End - TS_Start)
     return TS_End - TS_Start
-end
---[[
-            USEFUL STUFF, RIGHT?
-reaper.GetSet_LoopTimeRange2()
-reaper.GetSet_LoopTimeRange()
-reaper.EnumProjects() -- 
-reaper.SelectAllMediaItems()
---]]
---[[
-reaper.SelectAllMediaItems(0)
-TSItem()
-local Start_Length, End_Length = reaper.GetSet_LoopTimeRange(true, false, 0, 0, false)
---]]
-
-function NumProjects()
-    local Projects = 0
-    while reaper.EnumProjects(Projects, "") ~= nil do
-        Projects = Projects + 1
-    end
-    return Projects  
 end
