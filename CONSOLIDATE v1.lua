@@ -2,7 +2,7 @@
 
 local r = reaper
 
-function Msg(param) -- print string to console
+function Msg(param)
     reaper.ClearConsole()
     reaper.ShowConsoleMsg(tostring(param))
 end
@@ -33,7 +33,6 @@ end
 
 function Len_TS()
     local TS_Start, TS_End = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
-    --Msg(TS_End - TS_Start)
     return TS_End - TS_Start
 end
 --[[
