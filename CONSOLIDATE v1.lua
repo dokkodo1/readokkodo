@@ -15,7 +15,7 @@ function ProjTabPrev()
     reaper.Main_OnCommand(40862, 0)
 end
 
-function TSItem()
+function TSItems()
     reaper.Main_OnCommand(40290, 0)
 end
 
@@ -35,6 +35,7 @@ function Len_TS()
     local TS_Start, TS_End = reaper.GetSet_LoopTimeRange(false, false, 0, 0, false)
     return TS_End - TS_Start
 end
+
 --[[
             USEFUL STUFF, RIGHT?
 reaper.GetSet_LoopTimeRange2()
@@ -54,4 +55,12 @@ function NumProjects()
         Projects = Projects + 1
     end
     return Projects  
+end
+
+function GenerateRegions()
+    for i in NumProjects() do
+        r.SelectAllMediaItems(i)
+        TSItems()
+        CreateRegion()
+    end
 end
