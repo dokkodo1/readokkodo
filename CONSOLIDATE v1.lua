@@ -54,3 +54,5 @@ function NumProjects()
 end
 
 Msg(NumProjects())
+
+-- did we do it?

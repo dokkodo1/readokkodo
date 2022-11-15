@@ -1,0 +1,14 @@
+diff --git a/CONSOLIDATE v1.lua b/CONSOLIDATE v1.lua
+--- CONSOLIDATE v1.lua
++++ CONSOLIDATE v1.lua
+@@ -52,5 +52,7 @@
+     return Projects
+     
+ end
+ 
+-Msg(NumProjects())
+\ No newline at end of file
++Msg(NumProjects())
++
++-- did we do it?
+\ No newline at end of file
