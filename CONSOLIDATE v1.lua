@@ -66,6 +66,3 @@ function GenerateRegions()
 end
 
 Msg(Len_TS())
--- is it working
--- i think it works
---restarting
