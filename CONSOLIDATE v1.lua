@@ -68,3 +68,5 @@ end
 --local edit
 -- some edit
 -- leaving work now
+
+Msg(Len_TS())
