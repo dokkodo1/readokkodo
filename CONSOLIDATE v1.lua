@@ -1,5 +1,6 @@
 -- CONSOLIDATE ALL PROJECT TABS INTO MASTER PROJECT
 
+---@diagnostic disable-next-line: undefined-global
 local r = reaper
 
 function Msg(param)
@@ -36,30 +37,50 @@ function Len_TS()
     return TS_End - TS_Start
 end
 
---[[
-            USEFUL STUFF, RIGHT?
-r.GetSet_LoopTimeRange2()
-r.GetSet_LoopTimeRange()
-r.EnumProjects() -- 
-r.SelectAllMediaItems()
---]]
---[[
-r.SelectAllMediaItems(0)
-TSItem()
-local Start_Length, End_Length = r.GetSet_LoopTimeRange(true, false, 0, 0, false)
---]]
+function ClearTS()
+    r.GetSet_LoopTimeRange(true, true, 0, 0, false)
+end
+
+function UnselectItems()
+    reaper.SelectAllMediaItems(-1, false)
+end
+
+function ClearAll()
+    ClearTS()
+    UnselectItems()
+end
+
+function CursorToEnd()
+    r.SelectAllMediaItems(-1, true)
+    TSItems()
+    r.SetEditCurPos(Len_TS() + 5, false, false)
+    ClearAll()
+end
 
 function NumProjects()
     local Projects = 0
     while r.EnumProjects(Projects, "") ~= nil do
         Projects = Projects + 1
     end
-    return Projects  
+    return Projects
 end
 
-function MassCopy()
+function GetProjectID() -- ! Needs work
+    local i = 0
+    for i in NumProjects() do
+        r.SelectProjectInstance(i)
+        r.SelectAllMediaItems(i, true)
+        TSItems()
+        CreateRegion()
+    end
+    
+end
+
+
+function MassCopy() -- ! Needs work
     local current_project
     r.SelectAllMediaItems(-1, true)
     TSItems()
     CreateRegion()
     Copy()
+end
