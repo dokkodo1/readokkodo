@@ -57,14 +57,9 @@ function NumProjects()
     return Projects  
 end
 
-function GenerateRegions()
-    for i in NumProjects() do
-        r.SelectAllMediaItems(i)
-        TSItems()
-        CreateRegion()
-    end
-end
-
-Msg(Len_TS())
-
--- are you watching?
+function MassCopy()
+    local current_project
+    r.SelectAllMediaItems(-1, true)
+    TSItems()
+    CreateRegion()
+    Copy()
