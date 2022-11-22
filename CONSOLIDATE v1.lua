@@ -42,7 +42,7 @@ function ClearTS()
 end
 
 function UnselectItems()
-    reaper.SelectAllMediaItems(-1, false)
+    r.SelectAllMediaItems(-1, false)
 end
 
 function ClearAll()
@@ -65,22 +65,18 @@ function NumProjects()
     return Projects
 end
 
-function GetProjectID() -- ! Needs work
-    local i = 0
-    for i in NumProjects() do
+function Consolidate() -- ! Needs serious work
+    local i = NumProjects()
+    while i ~= 1 do
         r.SelectProjectInstance(i)
         r.SelectAllMediaItems(i, true)
         TSItems()
-        CreateRegion()
+        Copy()
+        r.SelectProjectInstance(0)
+        --CursorToEnd()
+        Paste()
+        i = i - 1
     end
     
 end
-
-
-function MassCopy() -- ! Needs work
-    local current_project
-    r.SelectAllMediaItems(-1, true)
-    TSItems()
-    CreateRegion()
-    Copy()
-end
+Consolidate()
