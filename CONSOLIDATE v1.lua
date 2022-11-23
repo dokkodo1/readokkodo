@@ -60,15 +60,16 @@ function CursorToEnd()                              -- moves cursor 5 seconds af
     ClearAll()
 end
 
-function SelectTSCopy(CurrentProj)                  -- !Needs work!
-    r.SelectAllMediaItems(CurrentProj, true) TSItems() Copy()
+function SelectTSCopy(CurrentProj)                  -- selects all items in current project tab and copies
+    r.SelectAllMediaItems(CurrentProj, true) TSItems()
+    Copy()
 end
 
-function PasteToMaster(MasterProj)                  -- !Needs work!
+function PasteToMaster(MasterProj)                  -- pastes to master project tab
     r.SelectProjectInstance(MasterProj) Paste()
 end
 
-function NumProjects()                              -- outputs the number of project tabs (thanks alex)
+function NumProjects()                              -- outputs the number of project tabs
     local Projects = 0
     while r.EnumProjects(Projects, "") ~= nil do
         Projects = Projects + 1
@@ -76,28 +77,24 @@ function NumProjects()                              -- outputs the number of pro
     return Projects
 end
 
-function GetProjects()                              -- stores each project tab in a table
+function GetProjects()                              -- stores each project tab in a table as userdata
     local Projects = {}
-    for i = 0, NumProjects() + 1 do
+    for i = 0, NumProjects() - 1 do
         Projects[i] = r.EnumProjects(i, "")
     end
     return Projects
 end
 
 
-function CopyPaste(CurrentProj, MasterProj)         -- !Needs work!
+function CopyPaste(CurrentProj, MasterProj)         -- copies and pastes from current project tab to master project tab
     SelectTSCopy(CurrentProj) PasteToMaster(MasterProj)
 end
 
-function Consolidate()                              -- !Needs work!
+function Consolidate()                              -- consolidates all project tabs into master project tab
     local Projects = GetProjects()
     local MasterProj = Projects[1]
-    for i = 2, #Projects do
+    for i = 2, #Projects - 1 do
         CopyPaste(Projects[i], MasterProj)
     end
 end
-
-
-
---Consolidate()
 
