@@ -60,13 +60,12 @@ function CursorToEnd()                              -- moves cursor 5 seconds af
     ClearAll()
 end
 
-function SelectTSCopy(CurrentProj, ...)             -- !Needs work!
-    r.SelectAllMediaItems(CurrentProj, true)
-    TSItems() Copy()
+function SelectTSCopy(CurrentProj)                  -- !Needs work!
+    r.SelectAllMediaItems(CurrentProj, true) TSItems() Copy()
 end
 
-function PasteToMaster()                            -- !Needs work!
-    r.SelectProjectInstance(1) Paste()
+function PasteToMaster(MasterProj)                  -- !Needs work!
+    r.SelectProjectInstance(MasterProj) Paste()
 end
 
 function NumProjects()                              -- outputs the number of project tabs (thanks alex)
@@ -83,17 +82,22 @@ function GetProjects()                              -- stores each project tab i
         Projects[i] = r.EnumProjects(i, "")
     end
     return Projects
-    
 end
 
 
- --Msg(reaper.EnumProjects(-1))
-function Main()
-    ProjTabNext()
-    r.SelectAllMediaItems(0, true) Copy()
-    --SaveClose()
-    ProjTabPrev()
-    CursorToEnd() Paste()
+function CopyPaste(CurrentProj, MasterProj)         -- !Needs work!
+    SelectTSCopy(CurrentProj) PasteToMaster(MasterProj)
 end
 
-Main()
+function Consolidate()                              -- !Needs work!
+    local Projects = GetProjects()
+    local MasterProj = Projects[1]
+    for i = 2, #Projects do
+        CopyPaste(Projects[i], MasterProj)
+    end
+end
+
+
+
+--Consolidate()
+
